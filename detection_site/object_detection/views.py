@@ -63,28 +63,6 @@ def user_login(request):
 #         form = PasswordResetForm()
 #     return render(request, 'registration/password_reset_form.html', {'form': form})
 
-# def password_reset(request):
-#     if request.method == 'POST':
-#         form = PasswordResetForm(request.POST)
-#         if form.is_valid():
-#             email = form.cleaned_data['email']
-#             user = get_user_model().objects.get(email=email)
-#             token = default_token_generator.make_token(user)
-#             uid = urlsafe_base64_encode(force_bytes(user.pk))
-#             domain = request.get_host()
-#             protocol = 'https' if request.is_secure() else 'http'
-#             message = render_to_string('registration/password_reset_email.html', {
-#                 'user': user,
-#                 'domain': domain,
-#                 'protocol': protocol,
-#                 'uid': uid,
-#                 'token': token,
-#             })
-#             send_mail('Password Reset', message, settings.DEFAULT_FROM_EMAIL, [user.email])
-#             return redirect('object_detection:password_reset_done')
-#     else:
-#         form = PasswordResetForm()
-#     return render(request, 'registration/password_reset_form.html', {'form': form})
 
 def password_reset(request):
     if request.method == 'POST':
