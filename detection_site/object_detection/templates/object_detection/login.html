@@ -1,0 +1,44 @@
+{% extends "object_detection/base.html" %}
+
+{% block content %}
+<style>
+    .beige-text {
+        color: #f5deb3;
+        text-shadow: 1px 1px 15px rgba(255, 255, 255, 0.5);
+    }
+    .btn-custom-beige {
+        background-color: #f5deb3; /* Цвет светло-бежевый */
+        color: #293133; /* Цвет текста антрацит */
+        border: none;
+    }
+    .btn-custom-beige:hover {
+        background-color: #d9c091; /* Цвет кнопки при наведении, чуть темнее */
+    }
+    .clr-link {
+        color: #ffffff;
+    }
+    .clr-link:hover {
+        color: #f5deb3;
+    }
+</style>
+<div class="bg-image beige-text">
+    <div class="container">
+        <div class="row justify-content-end">
+            <div class="col-md-4">
+                <h2>Login</h2>
+                <form method="post" class="text-left">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{ form.as_p }}
+                    </div>
+                    <div class="form-group d-flex align-items-center">
+                        <button type="submit" class="btn btn-custom-beige mr-2">Login</button>
+                        <a href="{% url 'object_detection:register' %}" class="clr-link">Register</a>
+                        <a href="{% url 'object_detection:password_reset' %}" class="clr-link ml-3">Forgot password</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
