@@ -1,0 +1,50 @@
+{% extends "object_detection/base.html" %}
+
+{% block content %}
+<style>
+    .beige-text {
+        color: #f5deb3;
+        text-shadow: 0px 0px 30px #000000;
+    }
+    .btn-custom-beige {
+        background-color: #f5deb3;
+        color: #293133;
+        border: none;
+        margin-right: 20px; /* Раздвигаем кнопку от ссылки на 10 пикселей */
+    }
+    .btn-custom-beige:hover {
+        background-color: #807663;
+    }
+    .clr-link {
+        color: #ffffff;
+    }
+    .clr-link:hover {
+        color: #f5deb3;
+    }
+    .text-help {
+        color: #ffffff; /* Белый цвет для текста помощи */
+    }
+</style>
+<div class="beige-text">
+    <h2 align="center">Register</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="form-group d-flex align-items-center">
+            <button type="submit" class="btn btn-custom-beige">Register</button>
+            <a href="{% url 'object_detection:login' %}" class="clr-link">Login</a>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        var helpTexts = document.querySelectorAll('.helptext');
+        helpTexts.forEach(function(helpText) {
+            if (helpText.textContent.includes("Enter the same password as before, for verification")) {
+                helpText.classList.add('text-help');
+            }
+        });
+    });
+</script>
+{% endblock %}

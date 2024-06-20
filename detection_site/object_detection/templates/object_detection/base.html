@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{% block title %}Face Detection Platform{% endblock %}</title>
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <!-- CSS Для фонового изображения и навигационной панели -->
+    <style>
+        body {
+            background-image: url('/static/images/qyr4nhlxgve9lo6d7mgzlou5f4au424q.webp');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background-color: #dbd8ca !important;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <!-- Navbar (навигационная панель) начально загрузки -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="{% url 'object_detection:home' %}">Object Detection Platform</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'object_detection:home' %}">Home</a>
+                    </li>
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'object_detection:about' %}">About project</a>
+                    </li>
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'object_detection:dashboard' %}">Dashboard</a>
+                    </li>
+                    {% endif %}
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'object_detection:logout' %}">Logout</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'object_detection:login' %}">Login</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'object_detection:register' %}">Register</a>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Добавляем блок сообщений -->
+    <div class="container mt-4">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <main class="container mt-4">
+        {% block content %}{% endblock %}
+    </main>
+    <!-- Bootstrap и другие зависимости должны быть загружены непосредственно перед закрывающим тегом body -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Скрипт для автоматического скрытия сообщений
+    document.addEventListener("DOMContentLoaded", function() {...}); - Этот код ждет загрузки всей HTML-структуры страницы.
+    setTimeout(function() {...}, 3000); - Устанавливает таймер на 3 секунды.
+    var alerts = document.querySelectorAll('.alert'); - Находит все элементы с классом alert.
+    alerts.forEach(function(alert) {...}); - Проходит по всем найденным элементам alert.
+    alert.style.transition = "opacity 0.5s ease-out"; - Устанавливает плавный переход для изменения прозрачности.
+    alert.style.opacity = "0"; - Делает элемент полностью прозрачным.
+    setTimeout(function() { alert.remove(); }, 500); - Удаляет элемент из DOM через 0.5 секунды после того, как он стал прозрачным (позволяя анимации завершиться).-->
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            setTimeout(function() {
+                var alerts = document.querySelectorAll('.alert');
+                alerts.forEach(function(alert) {
+                    alert.style.transition = "opacity 0.5s ease-out";
+                    alert.style.opacity = "0";
+                    setTimeout(function() {
+                        alert.remove();
+                    }, 500);
+                });
+            }, 3000);
+        });
+    </script>
+
+</body>
+</html>

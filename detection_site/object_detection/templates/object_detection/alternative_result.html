@@ -1,0 +1,18 @@
+{% extends "object_detection/base.html" %}
+
+{% block content %}
+  <h1>Alternative Way Results</h1>
+
+  {% if detections %}
+    <ul>
+      {% for detection in detections %}
+        <li>
+          <p>Detected {{ detection.label }} with confidence {{ detection.score }} at location {{ detection.box }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No detections found.</p>
+  {% endif %}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends "object_detection/base.html" %}
+
+{% block content %}
+<style>
+    /* Стили для текста и ссылок */
+    h1, p, .centered-link {
+        color: #f5deb3;
+        text-shadow: 1px 1px 15px rgba(255, 255, 255);
+    }
+
+    .centered-link {
+        font-size: 20px; /* Увеличенный размер текста ссылки */
+    }
+
+    .centered-link b {
+        color: #ffffff; /* Белый цвет для текста внутри тега <b> */
+    }
+</style>
+
+<div class="text-center">
+    <h1>О проекте</h1>
+    <p>
+        Этот проект позволяет загружать изображения и распознавать объекты на них с помощью моделей машинного обучения.
+        Пользователи могут зарегистрироваться, загружать изображения и просматривать результаты распознавания объектов.
+    </p>
+    <p>
+        Если у вас есть вопросы или отзывы, пожалуйста, свяжитесь с нами по адресу admin-mail@example.com.
+    </p>
+</div>
+<div align="center">
+    <a href="{% url 'object_detection:dashboard' %}" class="centered-link">Go to <b>Dashboard</b></a>
+</div>
+{% endblock %}
