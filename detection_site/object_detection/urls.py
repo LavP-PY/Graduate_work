@@ -19,7 +19,6 @@ urlpatterns = [
     path('image/delete/<int:image_id>/', delete_image, name='delete_image'),
 
     path('process-alternative/<int:feed_id>/', process_alter_image_feed, name='process_alternative'),
-    # path('process-alternative/<int:feed_id>/', views.process_alternative, name='process_alternative'),
 
     path('password-reset/', UserForgotPasswordView.as_view(), name='password_reset'),
     path('password-reset/done/', password_reset_done, name='password_reset_done'),
