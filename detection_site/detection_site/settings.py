@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from .config import PASSWORD, MY_EMAIL
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -134,13 +135,18 @@ CHANNEL_LAYERS = {
     }
 }
 
+# Настройки яндекс хоста для восстановления пароля по email
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 587  # Порт для SMTP сервера Яндекса
 EMAIL_USE_TLS = True  # Используем TLS шифрование
-EMAIL_HOST_USER = 'plavrik@yandex.ru'  # Ваша почта на Яндексе
-EMAIL_HOST_PASSWORD = 'ywcbnvicekesgbju' # Пароль приложения, который вы создали на Яндексе
-DEFAULT_FROM_EMAIL = 'plavrik@yandex.ru'  # Адрес отправителя по умолчанию
+
+EMAIL_HOST_USER = MY_EMAIL  # Моя почта на Яндексе, сохранена в config.py, для проверки подставьте свою почту и пароль
+EMAIL_HOST_PASSWORD = PASSWORD # Пароль приложения, который я создал на Яндексе и сохранил в модуле config.py данного проекта
+
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER  # Адрес отправителя по умолчанию
+SERVER_EMAIL = EMAIL_HOST_USER
+EMAIL_ADMIN = EMAIL_HOST_USER
 
 
 LOGIN_URL = '/object_detection/login/'
